@@ -10,6 +10,7 @@ ADLINK_URL = "https://loot-link.com/s?DKeg208E"
 ROLE_ID = 1568248989969547347  # your role ID
 LOADSTRING = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/RexityHub/x7k9m2p1/refs/heads/main/a8j3n9q2"))()'
 EMBED_COLOR = 0xD81B7A
+STATUS_TEXT = "Over Rexity Hub *whispers* it's the best Steal an egg script"
 KEY_API_URL = os.getenv("KEY_API_URL", "")
 DB_FILE = os.getenv("DB_FILE", "redeemed.json")
 # =========================================================
@@ -37,7 +38,6 @@ async def verify_key(key):
         async with aiohttp.ClientSession(timeout=timeout) as s:
             async with s.get(KEY_API_URL, params={"key": key}, headers={"User-Agent": "Mozilla/5.0"}) as r:
                 text = (await r.text()).strip()
-                print("VERIFY:", r.status, text[:200])
                 if text.lower() in ("true", "false"):
                     return text.lower() == "true"
                 return None
@@ -151,7 +151,12 @@ class KeyBot(commands.Bot):
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = KeyBot(command_prefix="!", intents=intents, status=discord.Status.online, activity=discord.Activity(type=discord.ActivityType.watching, name="Rexity Hub | !panel"))
+bot = KeyBot(
+    command_prefix="!",
+    intents=intents,
+    status=discord.Status.online,
+    activity=discord.Activity(type=discord.ActivityType.watching, name=STATUS_TEXT),
+)
 
 
 @bot.event
@@ -177,4 +182,3 @@ async def panel(ctx):
 
 
 bot.run(os.getenv("TOKEN"))
-
