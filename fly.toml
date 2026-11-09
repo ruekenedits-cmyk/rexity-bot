@@ -1,0 +1,13 @@
+app = "rexity-key-bot"
+primary_region = "ams"
+
+[env]
+  DB_FILE = "/data/redeemed.json"
+
+[mounts]
+  source = "bot_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
